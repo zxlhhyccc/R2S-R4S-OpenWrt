@@ -17,7 +17,6 @@ rm -rf ./scripts/download.pl
 rm -rf ./include/download.mk
 wget -P scripts/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/scripts/download.pl
 wget -P include/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/include/download.mk
-sed -i '/unshift/d' scripts/download.pl
 
 ### 必要的 Patches ###
 # Patch arm64 型号名称
@@ -45,7 +44,6 @@ wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/pa
 patch -p1 < ./luci-app-firewall_add_fullcone.patch
 # FullCone 相关组件
 svn co https://github.com/Lienol/openwrt/branches/main/package/network/fullconenat package/network/fullconenat
-
 
 ### 获取额外的基础软件包 ###
 # AutoCore

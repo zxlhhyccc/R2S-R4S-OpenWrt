@@ -17,6 +17,7 @@ rm -rf ./scripts/download.pl
 rm -rf ./include/download.mk
 wget -P scripts/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/scripts/download.pl
 wget -P include/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/include/download.mk
+sed -i '/unshift/d' scripts/download.pl
 
 ### 必要的 Patches ###
 # Patch arm64 型号名称
@@ -48,7 +49,7 @@ svn co https://github.com/Lienol/openwrt/branches/main/package/network/fullconen
 
 ### 获取额外的基础软件包 ###
 # AutoCore
-svn co https://github.com/immortalwrt/immortalwrt/branches/master/package/lean/autocore package/lean/autocore
+svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/autocore package/lean/autocore
 rm -rf ./feeds/packages/utils/coremark
 svn co https://github.com/immortalwrt/packages/trunk/utils/coremark feeds/packages/utils/coremark
 # AutoMount
@@ -114,6 +115,11 @@ svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/n
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-ramfree package/lean/luci-app-ramfree
 # ServerChan 微信推送
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-serverchan package/new/luci-app-serverchan
+# SmartDNS
+rm -rf ./feeds/packages/net/smartdns
+rm -rf ./feeds/luci/applications/luci-app-smartdns
+svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/net/smartdns feeds/packages/net/smartdns
+svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-smartdns feeds/luci/applications/luci-app-smartdns
 # 网易云音乐解锁
 git clone -b master --depth 1 https://github.com/immortalwrt/luci-app-unblockneteasemusic.git package/new/luci-app-unblockneteasemusic
 # KMS 激活助手

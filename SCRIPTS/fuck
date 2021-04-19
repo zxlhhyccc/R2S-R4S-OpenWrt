@@ -8,7 +8,9 @@ rm -rf `ls | egrep -v '(etc|usr|www)'`
 cd /overlay/upper/etc/config
 rm -rf `ls | egrep '(luci|ucitrack)'`
 cd /overlay/upper/etc
-rm -rf `ls | egrep -v '(config|openclash|bench.log|passwd|shadow|sysupgrade.conf)'`
+rm -rf `ls | egrep -v '(config|openclash|smartdns|bench.log|passwd|shadow|sysupgrade.conf)'`
+cd /overlay/upper/etc/config
+rm -rf `ls | egrep -v '(arpbind|autoreboot|dhcp|firewall|frp|frps|fstab|network|oled|openclash|serverchan|system|tencentddns|unblockneteasemusic|upnpd|wolplus)'`
 cd /overlay/upper/usr
 rm -rf `ls | egrep -v '(share)'`
 cd /overlay/upper/usr/share

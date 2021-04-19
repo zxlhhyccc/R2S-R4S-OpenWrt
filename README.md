@@ -38,6 +38,7 @@
 - app:openclash
 - app:ramfree
 - app:serverchan
+- app:smartdns
 - app:tencentddns
 - app:unblockneteasemusic
 - app:upnp

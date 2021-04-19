@@ -7,6 +7,11 @@ svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/target/
 rm -rf ./package/boot/uboot-rockchip
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/boot/uboot-rockchip package/boot/uboot-rockchip
 
+# ADD Missing Kernel Config
+echo '
+# CONFIG_USERIO is not set
+' >> ./target/linux/rockchip/armv8/config-5.4
+
 # 使用特定的优化
 sed -i 's,-mcpu=generic,-march=armv8-a+crypto+crc -mabi=lp64,g' include/target.mk
 wget -P package/libs/mbedtls/patches/ https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/100-Implements-AES-and-GCM-with-ARMv8-Crypto-Extensions.patch

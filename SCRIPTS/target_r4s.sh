@@ -7,6 +7,11 @@ svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/target/
 rm -rf ./package/boot/uboot-rockchip
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/boot/uboot-rockchip package/boot/uboot-rockchip
 
+# ADD Missing Kernel Config
+echo '
+# CONFIG_USERIO is not set
+' >> ./target/linux/rockchip/armv8/config-5.4
+
 # 更换超频  2.2/1.8 GHz 电压表, 调高温度墙
 rm -rf ./target/linux/rockchip/patches-5.4/992-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch
 wget -P target/linux/rockchip/patches-5.4/ https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/main/991-rockchip-rk3399-overclock-to-2.2-1.8-GHz-for-NanoPi4.patch

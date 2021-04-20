@@ -14,7 +14,8 @@
 <h1 align="center">请勿用于商业用途!!!</h1>
 
 ## 说明
-* Fork自QiuSimons(GC404)大神的纯原生OP版本,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
+* Fork自QiuSimons(GC404)大神,基础编译源码来自immortalwrt项目,个人根据**完全私人**口味进行了一定修改,建议去源库了解更多
+    - [immortalwrt](https://github.com/immortalwrt/immortalwrt)
     - [QiuSimons/R2S-R4S-X86-OpenWrt](https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt)
 * ipv4: 192.168.2.1
 * username: root

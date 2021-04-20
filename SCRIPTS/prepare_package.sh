@@ -9,9 +9,6 @@ sed -i 's/Os/O3/g' include/target.mk
 ./scripts/feeds install -a
 # 默认开启 Irqbalance
 sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqbalance.config
-# 移除 SNAPSHOT 标签
-sed -i 's,-SNAPSHOT,,g' include/version.mk
-sed -i 's,-SNAPSHOT,,g' package/base-files/image-config.in
 # 维多利亚的秘密
 rm -rf ./scripts/download.pl
 rm -rf ./include/download.mk
@@ -33,9 +30,7 @@ patch -p1 < ./luci-add-filter-aaaa-option.patch
 
 ### Fullcone-NAT 部分 ###
 # Patch Kernel 以解决 FullCone 冲突
-pushd target/linux/generic/hack-5.4
-wget https://github.com/coolsnowwolf/lede/raw/master/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
-popd
+wget -P target/linux/generic/hack-5.4/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
 # Patch FireWall 以增添 FullCone 功能
 mkdir package/network/config/firewall/patches
 wget -P package/network/config/firewall/patches/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/package/network/config/firewall/patches/fullconenat.patch
@@ -43,7 +38,7 @@ wget -P package/network/config/firewall/patches/ https://github.com/immortalwrt/
 wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/luci-app-firewall_add_fullcone.patch
 patch -p1 < ./luci-app-firewall_add_fullcone.patch
 # FullCone 相关组件
-svn co https://github.com/Lienol/openwrt/branches/main/package/network/fullconenat package/network/fullconenat
+svn co https://github.com/Lienol/openwrt/branches/21.02/package/network/fullconenat package/network/fullconenat
 
 ### 获取额外的基础软件包 ###
 # AutoCore

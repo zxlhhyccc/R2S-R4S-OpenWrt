@@ -58,8 +58,8 @@ jobs:
       - name: Prepare Sources
         run: |
           sudo chown -R runner:runner /home/runner/work/R2S-R4S-OpenWrt
-          wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/SCRIPTS/01_get_ready.sh
-          /bin/bash 01_get_ready.sh
+          cp -r ./SCRIPTS/get_ready.sh ./get_ready.sh
+          /bin/bash get_ready.sh
       - name: Prepare Package
         run: |
           cd openwrt

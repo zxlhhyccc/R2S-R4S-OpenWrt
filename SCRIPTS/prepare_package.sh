@@ -9,115 +9,49 @@ sed -i 's/Os/O3/g' include/target.mk
 ./scripts/feeds install -a
 # 默认开启 Irqbalance
 sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqbalance.config
-# 维多利亚的秘密
-rm -rf ./scripts/download.pl
-rm -rf ./include/download.mk
-wget -P scripts/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/scripts/download.pl
-wget -P include/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/include/download.mk
 
 ### 必要的 Patches ###
-# Patch arm64 型号名称
-wget -P target/linux/generic/pending-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/pending-5.4/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch
 # Patch jsonc
 wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/use_json_object_new_int64.patch
 patch -p1 < ./use_json_object_new_int64.patch
-# Patch dnsmasq
-wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/dnsmasq-add-filter-aaaa-option.patch
-wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/luci-add-filter-aaaa-option.patch
-wget -P package/network/services/dnsmasq/patches/ https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/900-add-filter-aaaa-option.patch
-patch -p1 < ./dnsmasq-add-filter-aaaa-option.patch
-patch -p1 < ./luci-add-filter-aaaa-option.patch
-
-### Fullcone-NAT 部分 ###
-# Patch Kernel 以解决 FullCone 冲突
-wget -P target/linux/generic/hack-5.4/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
-# Patch FireWall 以增添 FullCone 功能
-mkdir package/network/config/firewall/patches
-wget -P package/network/config/firewall/patches/ https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/package/network/config/firewall/patches/fullconenat.patch
 # Patch LuCI 以增添 FullCone 开关
 wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/luci-app-firewall_add_fullcone.patch
 patch -p1 < ./luci-app-firewall_add_fullcone.patch
-# FullCone 相关组件
-svn co https://github.com/Lienol/openwrt/branches/21.02/package/network/fullconenat package/network/fullconenat
-
-### 获取额外的基础软件包 ###
-# AutoCore
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/autocore package/lean/autocore
-rm -rf ./feeds/packages/utils/coremark
-svn co https://github.com/immortalwrt/packages/trunk/utils/coremark feeds/packages/utils/coremark
-# AutoMount
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/lean/automount package/lean/automount
-# 更换 Nodejs 版本
-rm -rf ./feeds/packages/lang/node
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node feeds/packages/lang/node
-rm -rf ./feeds/packages/lang/node-arduino-firmata
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-arduino-firmata feeds/packages/lang/node-arduino-firmata
-rm -rf ./feeds/packages/lang/node-cylon
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-cylon feeds/packages/lang/node-cylon
-rm -rf ./feeds/packages/lang/node-hid
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-hid feeds/packages/lang/node-hid
-rm -rf ./feeds/packages/lang/node-homebridge
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-homebridge feeds/packages/lang/node-homebridge
-rm -rf ./feeds/packages/lang/node-serialport
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-serialport feeds/packages/lang/node-serialport
-rm -rf ./feeds/packages/lang/node-serialport-bindings
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-serialport-bindings feeds/packages/lang/node-serialport-bindings
-rm -rf ./feeds/packages/lang/node-yarn
-svn co https://github.com/nxhack/openwrt-node-packages/trunk/node-yarn feeds/packages/lang/node-yarn
-ln -sf ../../../feeds/packages/lang/node-yarn ./package/feeds/packages/node-yarn
-# UPX 可执行软件压缩
-sed -i '/patchelf pkgconf/i\tools-y += ucl upx' ./tools/Makefile
-sed -i '\/autoconf\/compile :=/i\$(curdir)/upx/compile := $(curdir)/ucl/compile' ./tools/Makefile
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/tools/upx tools/upx
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/tools/ucl tools/ucl
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # Argon 主题
-git clone -b master --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/new/luci-theme-argon
-wget -P ./package/new/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
-wget -P ./package/new/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/header.htm
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-argon-config package/new/luci-app-argon-config
+#wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
+#wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
+rm -rf ./package/lean/luci-app-arpbind
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-arpbind package/lean/luci-app-arpbind
 # 定时重启
+rm -rf ./package/lean/luci-app-autoreboot
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-autoreboot package/lean/luci-app-autoreboot
 # Boost 通用即插即用
 svn co https://github.com/ryohuang/slim-wrt/trunk/slimapps/application/luci-app-boostupnp package/new/luci-app-boostupnp
 sed -i 's,api.ipify.org,myip.ipip.net/s,g' ./package/new/luci-app-boostupnp/root/usr/sbin/boostupnp.sh
 # CPU 控制相关
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-cpufreq package/lean/luci-app-cpufreq
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-cpulimit package/lean/luci-app-cpulimit
-svn co https://github.com/immortalwrt/packages/trunk/utils/cpulimit package/lean/cpulimit
+rm -rf ./feeds/luci/applications/luci-app-cpulimit
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-cpulimit feeds/luci/applications/luci-app-cpulimit
 # 动态DNS
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-tencentddns package/new/luci-app-tencentddns
 # FRP 内网穿透
-rm -rf ./feeds/luci/applications/luci-app-frps
-rm -rf ./feeds/luci/applications/luci-app-frpc
-rm -rf ./feeds/packages/net/frp
-rm -f ./package/feeds/packages/frp
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps package/lean/luci-app-frps
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc package/lean/luci-app-frpc
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp package/lean/frp
-# IPv6 兼容助手
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/ipv6-helper package/lean/ipv6-helper
+# rm -rf ./feeds/luci/applications/luci-app-frps
+# rm -rf ./feeds/luci/applications/luci-app-frpc
+# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps feeds/luci/applications/luci-app-frps
+# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc feeds/luci/applications/luci-app-frpc
 # OLED 驱动程序
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-oled package/new/luci-app-oled
-# OpenClash
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/new/luci-app-openclash
 # 清理内存
+rm -rf ./package/lean/luci-app-ramfree
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-ramfree package/lean/luci-app-ramfree
 # ServerChan 微信推送
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-serverchan package/new/luci-app-serverchan
-# SmartDNS
-rm -rf ./feeds/packages/net/smartdns
-rm -rf ./feeds/luci/applications/luci-app-smartdns
-svn co https://github.com/immortalwrt/packages/branches/openwrt-21.02/net/smartdns feeds/packages/net/smartdns
-svn co https://github.com/immortalwrt/luci/branches/openwrt-21.02/applications/luci-app-smartdns feeds/luci/applications/luci-app-smartdns
-# 网易云音乐解锁
-git clone -b master --depth 1 https://github.com/immortalwrt/luci-app-unblockneteasemusic.git package/new/luci-app-unblockneteasemusic
+rm -rf ./feeds/luci/applications/luci-app-serverchan
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-serverchan feeds/luci/applications/luci-app-serverchan
 # KMS 激活助手
+rm -rf ./package/lean/luci-app-vlmcsd
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-vlmcsd package/lean/luci-app-vlmcsd
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/vlmcsd package/lean/vlmcsd
 # 网络唤醒
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-services-wolplus package/new/luci-app-services-wolplus
 # 翻译及部分功能优化

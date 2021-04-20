@@ -6,16 +6,12 @@ mkdir openwrt_back
 shopt -s extglobW
 tar zxvf ${latest_release}  --strip-components 1 -C ./openwrt_back
 rm -f ${latest_release}
-git clone --single-branch -b openwrt-21.02 https://github.com/openwrt/openwrt openwrt_new
-rm -f ./openwrt_new/include/version.mk
-rm -f ./openwrt_new/include/kernel-version.mk
-rm -f ./openwrt_new/package/base-files/image-config.in
-rm -rf ./openwrt_new/target/linux/*
-cp -f ./openwrt_back/include/version.mk ./openwrt_new/include/version.mk
-cp -f ./openwrt_back/include/kernel-version.mk ./openwrt_new/include/kernel-version.mk
-cp -f ./openwrt_back/package/base-files/image-config.in ./openwrt_new/package/base-files/image-config.in
-cp -rf ./openwrt_back/target/linux/* ./openwrt_new/target/linux/
-mkdir openwrt
-cp -rf ./openwrt_new/* ./openwrt/
+git clone --single-branch -b openwrt-21.02 https://github.com/immortalwrt/immortalwrt openwrt
+rm -f ./openwrt/include/version.mk
+rm -f ./openwrt/include/kernel-version.mk
+rm -f ./openwrt/package/base-files/image-config.in
+cp -f ./openwrt_back/include/version.mk ./openwrt/include/version.mk
+cp -f ./openwrt_back/include/kernel-version.mk ./openwrt/include/kernel-version.mk
+cp -f ./openwrt_back/package/base-files/image-config.in ./openwrt/package/base-files/image-config.in
 
 exit 0

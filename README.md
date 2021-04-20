@@ -41,6 +41,7 @@
 - app:serverchan
 - app:smartdns
 - app:tencentddns
+- app:turboacc
 - app:unblockneteasemusic
 - app:upnp
 - app:vlmcsd

@@ -20,8 +20,8 @@ patch -p1 < ./luci-app-firewall_add_fullcone.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # Argon 主题
-#wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
-#wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/header.htm
+wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
+wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
 rm -rf ./package/lean/luci-app-arpbind
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-arpbind package/lean/luci-app-arpbind
@@ -37,10 +37,10 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-cpulimit
 # 动态DNS
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-tencentddns package/new/luci-app-tencentddns
 # FRP 内网穿透
-# rm -rf ./feeds/luci/applications/luci-app-frps
-# rm -rf ./feeds/luci/applications/luci-app-frpc
-# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps feeds/luci/applications/luci-app-frps
-# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc feeds/luci/applications/luci-app-frpc
+rm -rf ./feeds/luci/applications/luci-app-frps
+rm -rf ./feeds/luci/applications/luci-app-frpc
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps feeds/luci/applications/luci-app-frps
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc feeds/luci/applications/luci-app-frpc
 # OLED 驱动程序
 rm -rf ./feeds/luci/applications/luci-app-oled
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-oled package/new/luci-app-oled

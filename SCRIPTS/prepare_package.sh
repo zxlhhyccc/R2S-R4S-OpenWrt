@@ -36,8 +36,11 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-tencentd
 # FRP 内网穿透
 rm -rf ./feeds/luci/applications/luci-app-frps
 rm -rf ./feeds/luci/applications/luci-app-frpc
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps feeds/luci/applications/luci-app-frps
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc feeds/luci/applications/luci-app-frpc
+rm -rf ./feeds/packages/net/frp
+rm -f ./package/feeds/packages/frp
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps package/lean/luci-app-frps
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc package/lean/luci-app-frpc
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp package/lean/frp
 # OLED 驱动程序
 rm -rf ./feeds/luci/applications/luci-app-oled
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-oled feeds/luci/applications/luci-app-oled

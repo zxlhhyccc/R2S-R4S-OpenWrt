@@ -21,25 +21,25 @@ wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https:/
 wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
 rm -rf ./package/lean/luci-app-arpbind
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-arpbind package/lean/luci-app-arpbind
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind package/lean/luci-app-arpbind
 # Boost 通用即插即用
 svn co https://github.com/ryohuang/slim-wrt/trunk/slimapps/application/luci-app-boostupnp package/new/luci-app-boostupnp
 sed -i 's,api.ipify.org,myip.ipip.net/s,g' ./package/new/luci-app-boostupnp/root/usr/sbin/boostupnp.sh
 # 动态DNS
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-tencentddns package/new/luci-app-tencentddns
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/new/luci-app-tencentddns
 # FRP 内网穿透
 rm -rf ./feeds/luci/applications/luci-app-frps
 rm -rf ./feeds/luci/applications/luci-app-frpc
 rm -rf ./feeds/packages/net/frp
 rm -f ./package/feeds/packages/frp
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps package/lean/luci-app-frps
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc package/lean/luci-app-frpc
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frps package/lean/luci-app-frps
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frpc package/lean/luci-app-frpc
 svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp package/lean/frp
 # ServerChan 微信推送
 rm -rf ./feeds/luci/applications/luci-app-serverchan
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-serverchan feeds/luci/applications/luci-app-serverchan
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feeds/luci/applications/luci-app-serverchan
 # 网络唤醒
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-services-wolplus package/new/luci-app-services-wolplus
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-services-wolplus package/new/luci-app-services-wolplus
 # 翻译及部分功能优化
 svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/lean/lean-translate
 

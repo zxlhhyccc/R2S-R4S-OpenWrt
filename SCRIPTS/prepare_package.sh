@@ -14,9 +14,6 @@ sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqba
 # Patch jsonc
 wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/use_json_object_new_int64.patch
 patch -p1 < ./use_json_object_new_int64.patch
-# Patch LuCI 以增添 FullCone 开关
-wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/package/luci-app-firewall_add_fullcone.patch
-patch -p1 < ./luci-app-firewall_add_fullcone.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # Argon 主题

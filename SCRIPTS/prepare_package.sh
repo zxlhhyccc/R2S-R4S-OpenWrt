@@ -40,7 +40,7 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frps feeds
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-frpc feeds/luci/applications/luci-app-frpc
 # OLED 驱动程序
 rm -rf ./feeds/luci/applications/luci-app-oled
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-oled package/new/luci-app-oled
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/others/luci-app-oled feeds/luci/applications/luci-app-oled
 # 清理内存
 rm -rf ./package/lean/luci-app-ramfree
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/lean/luci-app-ramfree package/lean/luci-app-ramfree

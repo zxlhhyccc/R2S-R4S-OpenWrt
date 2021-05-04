@@ -5,8 +5,6 @@ cd /overlay
 rm -rf `ls | egrep -v '(upper|.fs_state)'`
 cd /overlay/upper
 rm -rf `ls | egrep -v '(etc|usr|www)'`
-cd /overlay/upper/etc/config
-rm -rf `ls | egrep '(luci|ucitrack)'`
 cd /overlay/upper/etc
 rm -rf `ls | egrep -v '(config|openclash|smartdns|bench.log|passwd|shadow|sysupgrade.conf)'`
 cd /overlay/upper/etc/config

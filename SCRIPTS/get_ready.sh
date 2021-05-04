@@ -17,7 +17,7 @@ rm -rf ./openwrt_back/target/linux/rockchip
 cp -f ./openwrt_back/include/version.mk ./openwrt/include/version.mk
 cp -f ./openwrt_back/include/kernel-version.mk ./openwrt/include/kernel-version.mk
 cp -f ./openwrt_back/package/base-files/image-config.in ./openwrt/package/base-files/image-config.in
-cp -rf ./openwrt_back/target/linux/* ./openwrt_new/target/linux/
+cp -rf ./openwrt_back/target/linux/* ./openwrt/target/linux/
 rm -rf ./openwrt_back
 
 exit 0

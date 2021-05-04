@@ -37,6 +37,9 @@ svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp feeds/package
 # ServerChan 微信推送
 rm -rf ./feeds/luci/applications/luci-app-serverchan
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feeds/luci/applications/luci-app-serverchan
+# 解锁网易云
+rm -rf ./feeds/luci/applications/luci-app-unblockneteasemusic
+git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
 # 网络唤醒
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-services-wolplus package/new/luci-app-services-wolplus
 # 翻译及部分功能优化

@@ -21,7 +21,7 @@
 * username: root
 * password: 空
 * 原汁原味非杂交! 感谢R2S Club及R4S Club/天灵/GC/QC等诸多大佬的努力!
-* 添加Flow Offload+Full Cone Nat
+* 添加shortcut-fe/Flow Offload(二选一)+Full Cone Nat+BBR
 * 支持scp和sftp
 * 无usb-wifi支持(r2s/r4s).wan&lan交换(r2s)
 * 支持SSD1306驱动的12864(0.96英寸)和12832(0.91英寸)OLED屏幕(r2s)

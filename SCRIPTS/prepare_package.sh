@@ -48,8 +48,6 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feed
 # 解锁网易云
 rm -rf ./feeds/luci/applications/luci-app-unblockneteasemusic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
-# 网络唤醒
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-services-wolplus package/new/luci-app-services-wolplus
 # 翻译及部分功能优化
 svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/lean/lean-translate
 
@@ -57,8 +55,6 @@ svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/ad
 # Lets Fuck
 mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
-# 最大连接数
-sed -i 's/16384/65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V %C'/g" package/base-files/files/etc/openwrt_release
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner

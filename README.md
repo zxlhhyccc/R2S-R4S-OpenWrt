@@ -45,7 +45,7 @@
 - app:unblockneteasemusic
 - app:upnp
 - app:vlmcsd
-- app:wol-plus
+- app:wol
 - theme:argon
 - theme:bootstrap
 

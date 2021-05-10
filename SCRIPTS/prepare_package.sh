@@ -21,8 +21,10 @@ patch -p1 < ./use_json_object_new_int64.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # Argon 主题
-wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
-wget -P ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon -N https://github.com/jerrykuku/luci-theme-argon/raw/2e5285979bd79761fde93e05148c0748ca3f62b4/luasrc/view/themes/argon/header.htm
+rm -f ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/footer.htm
+rm -f ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/header.htm
+wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
+wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/2e5285979bd79761fde93e05148c0748ca3f62b4/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
 rm -rf ./package/lean/luci-app-arpbind
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind package/lean/luci-app-arpbind

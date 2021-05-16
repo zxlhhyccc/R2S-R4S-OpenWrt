@@ -26,8 +26,8 @@ rm -f ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/header.htm
 wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
 wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/2e5285979bd79761fde93e05148c0748ca3f62b4/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
-rm -rf ./package/lean/luci-app-arpbind
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind package/lean/luci-app-arpbind
+rm -rf ./feeds/luci/applications/luci-app-arpbind
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind feeds/luci/applications/luci-app-arpbind
 # Boost 通用即插即用
 svn co https://github.com/QiuSimons/slim-wrt/branches/main/slimapps/application/luci-app-boostupnp package/new/luci-app-boostupnp
 rm -rf ./feeds/packages/net/miniupnpd
@@ -51,7 +51,7 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feed
 rm -rf ./feeds/luci/applications/luci-app-unblockneteasemusic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
 # 翻译及部分功能优化
-svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/lean/lean-translate
+svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/new/lean-translate
 
 ### 最后的收尾工作 ###
 # Lets Fuck
@@ -62,7 +62,7 @@ sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V %C'/g" package/base
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i "s/openclash.config.enable=0/openclash.config.enable=1/g" feeds/luci/applications/luci-app-openclash/root/etc/uci-defaults/luci-openclash
-sed -i '/exit 0/i\echo "/usr/share/unblockneteasemusic/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf' package/lean/lean-translate/files/zzz-default-settings
+sed -i '/exit 0/i\echo "/usr/share/unblockneteasemusic/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf' package/new/lean-translate/files/zzz-default-settings
 # 生成默认配置及缓存
 rm -rf .config
 

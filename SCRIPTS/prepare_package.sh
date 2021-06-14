@@ -20,19 +20,13 @@ wget https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/new/packa
 patch -p1 < ./use_json_object_new_int64.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
-# Argon 主题
-rm -f ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/footer.htm
-rm -f ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/header.htm
-wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/9fdcfc866ca80d8d094d554c6aedc18682661973/luasrc/view/themes/argon/footer.htm
-wget -P feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon https://github.com/jerrykuku/luci-theme-argon/raw/2e5285979bd79761fde93e05148c0748ca3f62b4/luasrc/view/themes/argon/header.htm
 # MAC 地址与 IP 绑定
 rm -rf ./feeds/luci/applications/luci-app-arpbind
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind feeds/luci/applications/luci-app-arpbind
 # Boost 通用即插即用
-svn co https://github.com/QiuSimons/slim-wrt/branches/main/slimapps/application/luci-app-boostupnp package/new/luci-app-boostupnp
 rm -rf ./feeds/packages/net/miniupnpd
 svn co https://github.com/immortalwrt/packages/trunk/net/miniupnpd feeds/packages/net/miniupnpd
-# 动态DNS
+# DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/new/luci-app-tencentddns
 # FRP 内网穿透
 rm -rf ./feeds/luci/applications/luci-app-frps

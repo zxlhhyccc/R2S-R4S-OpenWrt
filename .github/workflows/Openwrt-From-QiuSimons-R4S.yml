@@ -72,11 +72,6 @@ jobs:
           cd openwrt
           wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/SCRIPTS/03_convert_translation.sh
           /bin/bash 03_convert_translation.sh
-      - name: Add ACL
-        run: |
-          cd openwrt
-          wget -q https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/SCRIPTS/05_create_acl_for_luci.sh
-          /bin/bash 05_create_acl_for_luci.sh -a
       - name: Make Config
         run: |
           cd openwrt

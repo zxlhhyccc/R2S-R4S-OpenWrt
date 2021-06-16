@@ -8,8 +8,8 @@ on:
   #     - '.github/workflows/Openwrt-From-QiuSimons-R4S.yml'
   schedule:
     - cron: '00 03 * * 1'
-  # watch:
-  #   types: [started]
+  watch:
+    types: [started]
 
 jobs:
 

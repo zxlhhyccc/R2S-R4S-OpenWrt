@@ -32,7 +32,6 @@
 - app:arpbind
 - app:autoreboot
 - app:cpufreq
-- app:cpulimit
 - app:frpc(r2s)
 - app:frps(r4s)
 - app:oled(r2s)

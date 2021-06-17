@@ -52,6 +52,7 @@ svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/ad
 mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
 # 定制化配置
+sed -i 's|root:x:0:0:root:/root:/bin/ash|root:x:0:0:root:/root:/bin/bash|g' package/base-files/files/etc/passwd
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V %C'/g" package/base-files/files/etc/openwrt_release
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate

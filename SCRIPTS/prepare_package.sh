@@ -27,7 +27,7 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind feeds/l
 rm -rf ./feeds/packages/net/miniupnpd
 svn co https://github.com/immortalwrt/packages/trunk/net/miniupnpd feeds/packages/net/miniupnpd
 # DNSPod
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/new/luci-app-tencentddns
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/emortal/luci-app-tencentddns
 # FRP 内网穿透
 rm -rf ./feeds/luci/applications/luci-app-frps
 rm -rf ./feeds/luci/applications/luci-app-frpc
@@ -45,7 +45,7 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feed
 rm -rf ./feeds/luci/applications/luci-app-unblockneteasemusic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
 # 翻译及部分功能优化
-svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/new/lean-translate
+svn co https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/trunk/PATCH/duplicate/addition-trans-zh package/emortal/addition-trans-zh
 
 ### 最后的收尾工作 ###
 # Lets Fuck
@@ -57,7 +57,7 @@ sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V %C'/g" package/base
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i "s/openclash.config.enable=0/openclash.config.enable=1/g" feeds/luci/applications/luci-app-openclash/root/etc/uci-defaults/luci-openclash
-sed -i '/exit 0/i\echo "/usr/share/unblockneteasemusic/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf' package/new/lean-translate/files/zzz-default-settings
+sed -i '/exit 0/i\echo "/usr/share/unblockneteasemusic/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf' package/emortal/addition-trans-zh/files/zzz-default-settings
 sed -i 's,1608,1800,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 sed -i 's,2016,2208,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 #sed -i 's,1512,1608,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq

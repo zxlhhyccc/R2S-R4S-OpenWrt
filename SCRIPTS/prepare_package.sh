@@ -29,12 +29,12 @@ svn co https://github.com/immortalwrt/packages/trunk/net/miniupnpd feeds/package
 # DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/emortal/luci-app-tencentddns
 # FRP 内网穿透
-rm -rf ./feeds/luci/applications/luci-app-frps
-rm -rf ./feeds/luci/applications/luci-app-frpc
-rm -rf ./feeds/packages/net/frp
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frps feeds/luci/applications/luci-app-frps
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frpc feeds/luci/applications/luci-app-frpc
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp feeds/packages/net/frp
+# rm -rf ./feeds/luci/applications/luci-app-frps
+# rm -rf ./feeds/luci/applications/luci-app-frpc
+# rm -rf ./feeds/packages/net/frp
+# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frps feeds/luci/applications/luci-app-frps
+# svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-frpc feeds/luci/applications/luci-app-frpc
+# svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/frp feeds/packages/net/frp
 # OpenClash
 rm -rf ./feeds/luci/applications/luci-app-openclash
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash feeds/luci/applications/luci-app-openclash

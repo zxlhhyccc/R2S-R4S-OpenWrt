@@ -50,7 +50,6 @@ sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V %C'/g" package/base
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i "s/openclash.config.enable=0/openclash.config.enable=1/g" feeds/luci/applications/luci-app-openclash/root/etc/uci-defaults/luci-openclash
-sed -i 's/+kmod-fast-classifier //g' package/emortal/addition-trans-zh/Makefile
 sed -i 's,1608,1800,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 sed -i 's,2016,2208,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 #sed -i 's,1512,1608,g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq

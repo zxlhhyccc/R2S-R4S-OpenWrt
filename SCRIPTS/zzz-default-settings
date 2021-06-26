@@ -42,8 +42,10 @@ uci commit upnpd
 echo "10 2 * * * cd /usr/share/unblockneteasemusic/core/ && openssl req -new -x509 -key server.key -out server.crt -days 3650  -subj "/CN=*.music.163.com" && cd" >> /etc/crontabs/root && cat /etc/crontabs/root | sort | uniq > /tmp/tmp_cron_root && cat /tmp/tmp_cron_root > /etc/crontabs/root
 echo "/usr/share/unblockneteasemusic/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf
 
-#OpenClash 设置
-echo "/etc/openclash/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf
+#SSRP
+uci set shadowsocksr.@global[0].gfwlist_url='https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/gfw.txt'
+uci set shadowsocksr.@global[0].chnroute_url='https://cdn.jsdelivr.net/gh/QiuSimons/Chnroute@master/dist/chnroute/chnroute.txt'
+uci commit shadowsocksr
 
 #dnsmasq 设置以及开启 IPv6
 uci set dhcp.lan.ra='hybrid'
@@ -51,6 +53,7 @@ uci set dhcp.lan.ndp='hybrid'
 uci set dhcp.lan.dhcpv6='hybrid'
 uci set dhcp.lan.ra_management='1'
 uci set dhcp.@dnsmasq[0].rebind_protection='0'
+uci set dhcp.@dnsmasq[0].dns_redirect='1'
 uci del dhcp.@dnsmasq[0].filter_aaaa
 uci commit dhcp
 sed -i '/log-facility/d' /etc/dnsmasq.conf

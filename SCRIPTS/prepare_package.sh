@@ -18,6 +18,9 @@ wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt
 # Patch jsonc
 wget https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/jsonc/use_json_object_new_int64.patch
 patch -p1 < ./use_json_object_new_int64.patch
+# 更新r8168版本
+wget https://github.com/msylgj/immortalwrt/commit/3b1060.patch
+patch -p1 < ./3b1060.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MAC 地址与 IP 绑定

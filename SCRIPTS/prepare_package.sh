@@ -32,11 +32,6 @@ rm -rf ./feeds/packages/net/miniupnpd
 svn co https://github.com/immortalwrt/packages/trunk/net/miniupnpd feeds/packages/net/miniupnpd
 # DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/emortal/luci-app-tencentddns
-# 使用修改版frps/frpc(上游未合并)
-rm -rf ./feeds/luci/applications/luci-app-frps
-rm -rf ./feeds/luci/applications/luci-app-frpc
-svn co https://github.com/msylgj/luci-1/branches/patch-2/applications/luci-app-frps feeds/luci/applications/luci-app-frps
-svn co https://github.com/msylgj/luci-1/branches/patch-2/applications/luci-app-frpc feeds/luci/applications/luci-app-frpc
 # ServerChan 微信推送
 rm -rf ./feeds/luci/applications/luci-app-serverchan
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feeds/luci/applications/luci-app-serverchan

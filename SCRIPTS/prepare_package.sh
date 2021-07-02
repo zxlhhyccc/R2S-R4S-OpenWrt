@@ -35,6 +35,9 @@ svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns pac
 # ServerChan 微信推送
 rm -rf ./feeds/luci/applications/luci-app-serverchan
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-serverchan feeds/luci/applications/luci-app-serverchan
+# SSR Plus: add DNSProxy support
+rm -rf ./feeds/luci/applications/luci-app-ssr-plus
+svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
 # 解锁网易云
 rm -rf ./feeds/luci/applications/luci-app-unblockneteasemusic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
@@ -51,7 +54,7 @@ sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-fi
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-pushd feeds/luci/applications//luci-app-ssr-plus
+pushd feeds/luci/applications/luci-app-ssr-plus
 sed -i 's,ispip.clang.cn/all_cn,cdn.jsdelivr.net/gh/QiuSimons/Chnroute@master/dist/chnroute/chnroute,' root/etc/init.d/shadowsocksr
 sed -i 's,YW5vbnltb3Vz/domain-list-community/release/gfwlist.txt,Loyalsoldier/v2ray-rules-dat/release/gfw.txt,' root/etc/init.d/shadowsocksr
 sed -i '/Clang.CN.CIDR/a\o:value("https://cdn.jsdelivr.net/gh/QiuSimons/Chnroute@master/dist/chnroute/chnroute.txt", translate("QiuSimons/Chnroute"))' luasrc/model/cbi/shadowsocksr/advanced.lua

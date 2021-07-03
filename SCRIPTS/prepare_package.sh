@@ -24,6 +24,10 @@ git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/r8168/patches package/kernel/r8168/patches
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
+# MOD Argon
+pushd feeds/luci/themes/luci-theme-argon
+wget -qO - https://github.com/msylgj/luci-theme-argon/commit/e6a224a.patch | patch -p1
+popd
 # MAC 地址与 IP 绑定
 rm -rf ./feeds/luci/applications/luci-app-arpbind
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-arpbind feeds/luci/applications/luci-app-arpbind

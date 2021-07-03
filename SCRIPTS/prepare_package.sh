@@ -26,7 +26,7 @@ svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
 pushd feeds/luci/themes/luci-theme-argon
-wget -qO - https://github.com/msylgj/luci-theme-argon/commit/e6a224a.patch | patch -p1
+wget -qO - https://github.com/msylgj/luci-theme-argon/commit/0197576.patch | patch -p1
 popd
 # MAC 地址与 IP 绑定
 rm -rf ./feeds/luci/applications/luci-app-arpbind

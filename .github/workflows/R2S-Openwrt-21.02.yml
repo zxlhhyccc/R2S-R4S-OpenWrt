@@ -1,13 +1,13 @@
-name: R4S Openwrt From QiuSimons
+name: R2S Openwrt 21.02
 
 on:
   # push:
   #   branches:
   #     - 21.02
   #   paths:
-  #     - '.github/workflows/Openwrt-From-QiuSimons-R4S.yml'
+  #     - '.github/workflows/R2S-Openwrt-21.02.yml'
   schedule:
-    - cron: '00 03 * * 1'
+    - cron: '00 04 * * 1'
   watch:
     types: [started]
 
@@ -64,9 +64,9 @@ jobs:
         run: |
           cd openwrt
           cp -r ../SCRIPTS/prepare_package.sh ./prepare_package.sh
-          cp -r ../SCRIPTS/target_r4s.sh ./target_r4s.sh
+          cp -r ../SCRIPTS/target_r2s.sh ./target_r2s.sh
           /bin/bash prepare_package.sh
-          /bin/bash target_r4s.sh
+          /bin/bash target_r2s.sh
       - name: Convert Translation
         run: |
           cd openwrt
@@ -75,7 +75,7 @@ jobs:
       - name: Make Config
         run: |
           cd openwrt
-          mv ../SEED/config_r4s.seed .config
+          mv ../SEED/config_r2s.seed .config
           make defconfig
       - name: Smart chmod
         run: |
@@ -123,13 +123,13 @@ jobs:
           cd ./artifact/
           gzip -d *.gz && exit 0
           gzip *.img
-          sha256sum *.gz | tee R4S-OPoA-$(date +%Y-%m-%d).sha256sum
-          mv *ext4* ./R4S-OPoA-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *squashfs* ./R4S-OPoA-$(date +%Y-%m-%d)-sfs.img.gz
+          sha256sum *.gz | tee R2S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d).sha256sum
+          mv *ext4* ./R2S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d)-ext4.img.gz
+          mv *squashfs* ./R2S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
-          cp .config ../artifact/R4S-config-full.seed
-          ./scripts/diffconfig.sh > ../artifact/R4S-config-diff.seed
-          artifact_tag="R4S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d)"
+          cp .config ../artifact/R2S-config-full.seed
+          ./scripts/diffconfig.sh > ../artifact/R2S-config-diff.seed
+          artifact_tag="R2S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d)"
           release_tag="R2S-R4S-OPoA-21.02.0-rc3-$(date +%Y-%m-%d)"
           echo "##[set-output name=artifact_tag;]$artifact_tag"
           echo "##[set-output name=release_tag;]$release_tag"

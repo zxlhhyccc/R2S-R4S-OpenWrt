@@ -28,9 +28,9 @@
 * OC-1.6(r2s)/2.2-1.8(r4s)
 
 ## 插件清单
-- app:argon-config
 - app:arpbind
 - app:autoreboot
+- app:beardropper
 - app:cpufreq
 - app:frpc(r2s)
 - app:frps(r4s)

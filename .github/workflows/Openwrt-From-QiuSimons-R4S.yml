@@ -3,7 +3,7 @@ name: R4S Openwrt From QiuSimons
 on:
   # push:
   #   branches:
-  #     - master
+  #     - 21.02
   #   paths:
   #     - '.github/workflows/Openwrt-From-QiuSimons-R4S.yml'
   schedule:

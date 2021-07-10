@@ -22,6 +22,8 @@ patch -p1 < ./use_json_object_new_int64.patch
 rm -rf ./package/kernel/r8168
 git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/r8168/patches package/kernel/r8168/patches
+# fix firewall flock
+patch -p1 < ../SCRIPTS/fix_firewall_flock.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
@@ -47,8 +49,6 @@ cp -f ../SCRIPTS/zzz-default-settings package/emortal/addition-trans-zh/files/zz
 # Lets Fuck
 mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
-# fuck firewall
-cp -f ../SCRIPTS/firewall.init package/network/config/firewall/files
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release

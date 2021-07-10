@@ -41,6 +41,8 @@ cp -f ../SCRIPTS/zzz-default-settings package/emortal/addition-trans-zh/files/zz
 # Lets Fuck
 mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
+# fuck firewall
+cp -f ../SCRIPTS/firewall.init package/network/config/firewall/files
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release

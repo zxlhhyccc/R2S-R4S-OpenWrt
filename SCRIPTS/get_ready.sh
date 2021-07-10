@@ -10,9 +10,14 @@ git clone --single-branch -b openwrt-21.02 https://github.com/immortalwrt/immort
 rm -f ./openwrt/include/version.mk
 rm -f ./openwrt/include/kernel-version.mk
 rm -f ./openwrt/package/base-files/image-config.in
+pushd openwrt/target/linux/
+rm -rf `ls | egrep -v '(rockchip)'`
+popd
+rm -rf ./openwrt_back/target/linux/rockchip
 cp -f ./openwrt_back/include/version.mk ./openwrt/include/version.mk
 cp -f ./openwrt_back/include/kernel-version.mk ./openwrt/include/kernel-version.mk
 cp -f ./openwrt_back/package/base-files/image-config.in ./openwrt/package/base-files/image-config.in
+cp -rf ./openwrt_back/target/linux/* ./openwrt/target/linux/
 rm -rf ./openwrt_back
 
 exit 0

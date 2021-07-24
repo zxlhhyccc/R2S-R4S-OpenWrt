@@ -16,8 +16,7 @@ wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt
 # Patch Kernel 以支持 Shortcut-FE
 wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
 # Patch jsonc
-wget https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/jsonc/use_json_object_new_int64.patch
-patch -p1 < ./use_json_object_new_int64.patch
+wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/jsonc/use_json_object_new_int64.patch | patch -p1
 # 更新r8168版本
 rm -rf ./package/kernel/r8168
 git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
@@ -28,7 +27,7 @@ patch -p1 < ../SCRIPTS/fix_firewall_flock.patch
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
 pushd feeds/luci/themes/luci-theme-argon
-wget -qO - https://github.com/msylgj/luci-theme-argon/commit/0197576.patch | patch -p1
+wget -qO- https://github.com/msylgj/luci-theme-argon/commit/0197576.patch | patch -p1
 popd
 # DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/emortal/luci-app-tencentddns

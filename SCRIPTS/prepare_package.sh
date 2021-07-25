@@ -30,7 +30,8 @@ pushd feeds/luci/themes/luci-theme-argon
 wget -qO- https://github.com/msylgj/luci-theme-argon/commit/0197576.patch | patch -p1
 popd
 # DNSPod
-svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns package/emortal/luci-app-tencentddns
+svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns feeds/luci/applications/luci-app-tencentddns
+ln -sf ../../../feeds/luci/applications/luci-app-tencentddns ./package/feeds/luci/luci-app-tencentddns
 # SSR Plus: add DNSProxy support
 rm -rf ./feeds/luci/applications/luci-app-ssr-plus
 svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus

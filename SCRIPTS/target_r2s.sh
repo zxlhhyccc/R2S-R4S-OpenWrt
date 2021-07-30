@@ -2,7 +2,7 @@
 clear
 
 # 使用特定的优化
-sed -i 's,-mcpu=generic,-mcpu=cortex-a53+crypto+crc -funsafe-math-optimizations,g' include/target.mk
+sed -i 's,-mcpu=generic,-mcpu=cortex-a53+crypto,g' include/target.mk
 
 # 配置 IRQ 并默认关闭 eth0 offloading rx/rx
 sed -i '/set_interface_core 4 "eth1"/a\set_interface_core 8 "ff160000" "ff160000.i2c"' target/linux/rockchip/armv8/base-files/etc/hotplug.d/net/40-net-smp-affinity

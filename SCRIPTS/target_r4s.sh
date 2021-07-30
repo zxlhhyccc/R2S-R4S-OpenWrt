@@ -9,7 +9,7 @@ wget https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/target_r4
 popd
 
 # 使用特定的优化
-sed -i 's,-mcpu=generic,-mcpu=cortex-a72.cortex-a53+crypto+crc -funsafe-math-optimizations,g' include/target.mk
+sed -i 's,-mcpu=generic,-mcpu=cortex-a72.cortex-a53+crypto,g' include/target.mk
 
 # 测试性功能
 sed -i '/CRYPTO_DEV_ROCKCHIP/d' ./target/linux/rockchip/armv8/config-5.4

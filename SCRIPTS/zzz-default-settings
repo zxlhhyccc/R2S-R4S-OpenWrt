@@ -25,6 +25,7 @@ EOF
 uci commit system
 
 #Feeds 更换镜像源
+sed -i 'immortalwrt_core,s,downloads.openwrt.org,mirrors.tencent.com/lede,g' /etc/opkg/distfeeds.conf
 sed -i 's,downloads.openwrt.org,downloads.immortalwrt.cnsztl.eu.org,g' /etc/opkg/distfeeds.conf
 #临时禁用sig检查
 sed -i 's,option check_signature,#option check_signature,g' /etc/opkg.conf

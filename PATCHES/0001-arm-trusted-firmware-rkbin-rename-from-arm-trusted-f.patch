@@ -1,0 +1,189 @@
+From b9ecfc9012500d668ec358a84df3632790414a75 Mon Sep 17 00:00:00 2001
+From: Tianling Shen <cnsztl@immortalwrt.org>
+Date: Sun, 8 Aug 2021 16:19:03 +0800
+Subject: [PATCH 1/3] arm-trusted-firmware-rkbin: rename from
+ arm-trusted-firmware-rk3328
+
+Added support for rk3399.
+
+Signed-off-by: Tianling Shen <cnsztl@immortalwrt.org>
+---
+ .../boot/arm-trusted-firmware-rk3328/Makefile | 55 --------------
+ .../boot/arm-trusted-firmware-rkbin/Makefile  | 74 +++++++++++++++++++
+ .../src/trust.ini                             |  0
+ package/boot/uboot-rockchip/Makefile          |  4 +-
+ 4 files changed, 76 insertions(+), 57 deletions(-)
+ delete mode 100644 package/boot/arm-trusted-firmware-rk3328/Makefile
+ create mode 100644 package/boot/arm-trusted-firmware-rkbin/Makefile
+ rename package/boot/{arm-trusted-firmware-rk3328 => arm-trusted-firmware-rkbin}/src/trust.ini (100%)
+
+diff --git a/package/boot/arm-trusted-firmware-rk3328/Makefile b/package/boot/arm-trusted-firmware-rk3328/Makefile
+deleted file mode 100644
+index 5e15e57e35..0000000000
+--- a/package/boot/arm-trusted-firmware-rk3328/Makefile
++++ /dev/null
+@@ -1,55 +0,0 @@
+-#
+-# Copyright (C) 2021 ImmortalWrt
+-# (https://immortalwrt.org)
+-#
+-# This is free software, licensed under the GNU General Public License v2.
+-# See /LICENSE for more information.
+-#
+-
+-include $(TOPDIR)/rules.mk
+-
+-PKG_NAME:=arm-trusted-firmware-rk3328
+-PKG_RELEASE:=1
+-
+-PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL=https://github.com/rockchip-linux/rkbin.git
+-PKG_SOURCE_DATE:=2021-06-01
+-PKG_SOURCE_VERSION:=7d631e0d5b2d373b54d4533580d08fb9bd2eaad4
+-PKG_MIRROR_HASH:=73deb217d7f1dc87bb7a32a1b6855f957aeeb21dca86cdd5840c463683dc0f7d
+-
+-PKG_MAINTAINER:=AmadeusGhost <amadeus@immortalwrt.org>
+-
+-MAKE_PATH:=$(PKG_NAME)
+-
+-include $(INCLUDE_DIR)/package.mk
+-
+-define Package/arm-trusted-firmware-rk3328
+-    SECTION:=boot
+-    CATEGORY:=Boot Loaders
+-    TITLE:=ARM Trusted Firmware for Rockchip
+-    DEPENDS:=@TARGET_rockchip_armv8
+-endef
+-
+-define Build/Configure
+-	$(SED) 's,$$$$(PKG_BUILD_DIR),$(PKG_BUILD_DIR),g' $(PKG_BUILD_DIR)/trust.ini
+-	$(call Build/Configure/Default)
+-endef
+-
+-define Build/Compile
+-	mkimage -n rk3328 -T rksd -d $(PKG_BUILD_DIR)/bin/rk33/rk3328_ddr_333MHz_v1.17.bin $(PKG_BUILD_DIR)/idbloader.bin
+-	cat $(PKG_BUILD_DIR)/bin/rk33/rk322xh_miniloader_v2.50.bin >> $(PKG_BUILD_DIR)/idbloader.bin
+-	$(PKG_BUILD_DIR)/tools/trust_merger --replace bl31.elf $(PKG_BUILD_DIR)/bin/rk33/rk322xh_bl31_v1.46.elf $(PKG_BUILD_DIR)/trust.ini
+-endef
+-
+-define Build/InstallDev
+-	$(INSTALL_DIR) -p $(STAGING_DIR_IMAGE)
+-	$(CP) $(PKG_BUILD_DIR)/bin/rk33/rk322xh_bl31_v1.46.elf $(STAGING_DIR_IMAGE)/
+-	$(CP) $(PKG_BUILD_DIR)/tools/loaderimage $(STAGING_DIR_IMAGE)/
+-	$(CP) $(PKG_BUILD_DIR)/idbloader.bin $(STAGING_DIR_IMAGE)/
+-	$(CP) $(PKG_BUILD_DIR)/trust.bin $(STAGING_DIR_IMAGE)/
+-endef
+-
+-define Package/arm-trusted-firmware-rk3328/install
+-endef
+-
+-$(eval $(call BuildPackage,arm-trusted-firmware-rk3328))
+diff --git a/package/boot/arm-trusted-firmware-rkbin/Makefile b/package/boot/arm-trusted-firmware-rkbin/Makefile
+new file mode 100644
+index 0000000000..31b8b086b1
+--- /dev/null
++++ b/package/boot/arm-trusted-firmware-rkbin/Makefile
+@@ -0,0 +1,74 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# Copyright (C) 2021 ImmortalWrt.org
++
++include $(TOPDIR)/rules.mk
++
++PKG_NAME:=arm-trusted-firmware-rkbin
++PKG_RELEASE:=$(AUTORELEASE)
++
++PKG_SOURCE_PROTO:=git
++PKG_SOURCE_URL=https://github.com/rockchip-linux/rkbin.git
++PKG_SOURCE_DATE:=2021-06-01
++PKG_SOURCE_VERSION:=7d631e0d5b2d373b54d4533580d08fb9bd2eaad4
++PKG_MIRROR_HASH:=972c978e2df63e1d2fc38f4537d2ad92f87c656c0dd89b7f8deffd6075fff632
++
++PKG_MAINTAINER:=AmadeusGhost <amadeus@immortalwrt.org>
++
++MAKE_PATH:=$(PKG_NAME)
++
++include $(INCLUDE_DIR)/package.mk
++
++define Package/arm-trusted-firmware-rk3328
++    SECTION:=boot
++    CATEGORY:=Boot Loaders
++    TITLE:=ARM Trusted Firmware for Rockchip
++    DEPENDS:=@TARGET_rockchip_armv8
++ifneq ($(CONFIG_PACKAGE_arm-trusted-firmware-rk3328),)
++    SOC:=rk3328
++    ATF:=rk33/rk322xh_bl31_v1.46.elf
++    DDR:=rk33/rk3328_ddr_333MHz_v1.17.bin
++    LOADER:=rk33/rk322xh_miniloader_v2.50.bin
++endif
++endef
++
++define Package/arm-trusted-firmware-rk3399
++    SECTION:=boot
++    CATEGORY:=Boot Loaders
++    TITLE:=ARM Trusted Firmware for Rockchip
++    DEPENDS:=@TARGET_rockchip_armv8
++ifneq ($(CONFIG_PACKAGE_arm-trusted-firmware-rk3399),)
++    SOC:=rk3399
++    ATF:=rk33/rk3399_bl31_v1.35.elf
++    DDR:=rk33/rk3399_ddr_800MHz_v1.25.bin
++    LOADER:=rk33/rk3399_miniloader_v1.26.bin
++endif
++endef
++
++define Build/Configure
++	$(SED) 's,$$$$(PKG_BUILD_DIR),$(PKG_BUILD_DIR),g' $(PKG_BUILD_DIR)/trust.ini
++	$(call Build/Configure/Default)
++endef
++
++define Build/Compile
++	mkimage -n $$(SOC) -T rksd -d $(PKG_BUILD_DIR)/bin/$$(DDR) $(PKG_BUILD_DIR)/idbloader.bin
++	cat $(PKG_BUILD_DIR)/bin/$$(LOADER) >> $(PKG_BUILD_DIR)/idbloader.bin
++	$(PKG_BUILD_DIR)/tools/trust_merger --replace bl31.elf $(PKG_BUILD_DIR)/bin/$$(ATF) $(PKG_BUILD_DIR)/trust.ini
++endef
++
++define Build/InstallDev
++	$(INSTALL_DIR) -p $(STAGING_DIR_IMAGE)
++	$(CP) $(PKG_BUILD_DIR)/bin/$$(ATF) $(STAGING_DIR_IMAGE)/
++	$(CP) $(PKG_BUILD_DIR)/tools/loaderimage $(STAGING_DIR_IMAGE)/
++	$(CP) $(PKG_BUILD_DIR)/idbloader.bin $(STAGING_DIR_IMAGE)/
++	$(CP) $(PKG_BUILD_DIR)/trust.bin $(STAGING_DIR_IMAGE)/
++endef
++
++define Package/arm-trusted-firmware-rk3328/install
++endef
++
++define Package/arm-trusted-firmware-rk3399/install
++endef
++
++$(eval $(call BuildPackage,arm-trusted-firmware-rk3328))
++$(eval $(call BuildPackage,arm-trusted-firmware-rk3399))
+diff --git a/package/boot/arm-trusted-firmware-rk3328/src/trust.ini b/package/boot/arm-trusted-firmware-rkbin/src/trust.ini
+similarity index 100%
+rename from package/boot/arm-trusted-firmware-rk3328/src/trust.ini
+rename to package/boot/arm-trusted-firmware-rkbin/src/trust.ini
+diff --git a/package/boot/uboot-rockchip/Makefile b/package/boot/uboot-rockchip/Makefile
+index 03a2f07a84..bdc6cb2118 100644
+--- a/package/boot/uboot-rockchip/Makefile
++++ b/package/boot/uboot-rockchip/Makefile
+@@ -30,7 +30,7 @@ define U-Boot/nanopi-r2s-rk3328
+   BUILD_DEVICES:= \
+     friendlyarm_nanopi-r2s
+   DEPENDS:=+PACKAGE_u-boot-nanopi-r2s-rk3328:arm-trusted-firmware-rk3328
+-  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rk3328
++  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rkbin
+   ATF:=rk322xh_bl31_v1.46.elf
+   OF_PLATDATA:=$(1)
+   USE_RKBIN:=1
+@@ -42,7 +42,7 @@ define U-Boot/orangepi-r1-plus-rk3328
+   BUILD_DEVICES:= \
+     xunlong_orangepi-r1-plus
+   DEPENDS:=+PACKAGE_u-boot-orangepi-r1-plus-rk3328:arm-trusted-firmware-rk3328
+-  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rk3328
++  PKG_BUILD_DEPENDS:=arm-trusted-firmware-rkbin
+   ATF:=rk322xh_bl31_v1.46.elf
+   OF_PLATDATA:=$(1)
+   USE_RKBIN:=1
+-- 
+2.32.0.windows.2
+

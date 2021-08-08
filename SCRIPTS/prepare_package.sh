@@ -22,7 +22,11 @@ rm -rf ./package/kernel/r8168
 git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/r8168/patches package/kernel/r8168/patches
 # fix firewall flock
-patch -p1 < ../SCRIPTS/fix_firewall_flock.patch
+patch -p1 < ../PATCHES/0000-fix_firewall_flock.patch
+# use new uboot
+patch -p1 < ../PATCHES/0001-arm-trusted-firmware-rkbin-rename-from-arm-trusted-f.patch
+patch -p1 < ../PATCHES/0002-uboot-rockchip-use-rkbin-for-nanopi-r4s.patch
+patch -p1 < ../PATCHES/0003-uboot-rockchip-drop-ugly-hacks-from-friendlyarm.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon

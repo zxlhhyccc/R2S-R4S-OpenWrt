@@ -35,6 +35,7 @@
 - app:frpc(r2s)
 - app:frps(r4s)
 - app:oled(r2s)
+- app:openclash
 - app:ssrplus
 - app:ramfree
 - app:serverchan

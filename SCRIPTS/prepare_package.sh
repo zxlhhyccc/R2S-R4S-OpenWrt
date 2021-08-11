@@ -22,7 +22,7 @@ rm -rf ./package/kernel/r8168
 git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
 svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/r8168/patches package/kernel/r8168/patches
 # fix firewall flock
-patch -p1 < ../SCRIPTS/fix_firewall_flock.patch
+patch -p1 < ../PATCHES/001-fix-firewall-flock.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon

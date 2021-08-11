@@ -51,6 +51,9 @@ uci set shadowsocksr.@global[0].gfwlist_url='https://cdn.jsdelivr.net/gh/Loyalso
 uci set shadowsocksr.@global[0].chnroute_url='https://cdn.jsdelivr.net/gh/QiuSimons/Chnroute@master/dist/chnroute/chnroute.txt'
 uci commit shadowsocksr
 
+#OpenClash 设置
+echo "/etc/openclash/" >> /etc/sysupgrade.conf && cat /etc/sysupgrade.conf | sort | uniq > /tmp/tmp_sysupgrade_conf && cat /tmp/tmp_sysupgrade_conf > /etc/sysupgrade.conf
+
 #dnsmasq 设置
 uci set dhcp.@dnsmasq[0].rebind_protection='0'
 uci commit dhcp

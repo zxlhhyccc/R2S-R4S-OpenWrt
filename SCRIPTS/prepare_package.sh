@@ -17,12 +17,13 @@ wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt
 wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
 # Patch jsonc
 wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/jsonc/use_json_object_new_int64.patch | patch -p1
-# 更新r8168版本
-rm -rf ./package/kernel/r8168
-git clone https://github.com/BROBIRD/openwrt-r8168.git package/kernel/r8168
-svn co https://github.com/immortalwrt/immortalwrt/branches/openwrt-21.02/package/kernel/r8168/patches package/kernel/r8168/patches
 # fix firewall flock
 patch -p1 < ../PATCHES/001-fix-firewall-flock.patch
+# CacULE
+wget -qO- https://github.com/QiuSimons/openwrt-NoTengoBattery/commit/7d44cab.patch | patch -p1
+wget -qO target/linux/generic/hack-5.4/694-cacule-5.4.patch https://github.com/hamadmarri/cacule-cpu-scheduler/raw/master/patches/CacULE/v5.4/cacule-5.4.patch
+# UKSM
+wget -qO target/linux/generic/hack-5.4/695-uksm-5.4.patch https://github.com/dolohow/uksm/raw/master/v5.x/uksm-5.4.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon

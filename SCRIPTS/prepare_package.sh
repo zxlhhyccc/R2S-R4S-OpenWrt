@@ -24,11 +24,18 @@ wget -qO- https://github.com/QiuSimons/openwrt-NoTengoBattery/commit/7d44cab.pat
 wget -qO target/linux/generic/hack-5.4/694-cacule-5.4.patch https://github.com/hamadmarri/cacule-cpu-scheduler/raw/master/patches/CacULE/v5.4/cacule-5.4.patch
 # UKSM
 wget -qO target/linux/generic/hack-5.4/695-uksm-5.4.patch https://github.com/dolohow/uksm/raw/master/v5.x/uksm-5.4.patch
+# BBRv2
+wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/openwrt-kmod-bbr2.patch | patch -p1
+wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/693-Add_BBRv2_congestion_control_for_Linux_TCP.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
 pushd feeds/luci/themes/luci-theme-argon
 wget -qO- https://github.com/msylgj/luci-theme-argon/commit/0197576.patch | patch -p1
+popd
+# MOD TurboACC To Add BBRv2
+pushd feeds/luci/applications/luci-app-turboacc
+patch -p1 < ../../../../../PATCHES/003-mod-turboacc-switch-bbr-support-to-bbr2.patch
 popd
 # DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns feeds/luci/applications/luci-app-tencentddns

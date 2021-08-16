@@ -19,14 +19,14 @@ wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt
 wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/jsonc/use_json_object_new_int64.patch | patch -p1
 # fix firewall flock
 patch -p1 < ../PATCHES/001-fix-firewall-flock.patch
+# BBRv2
+wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/openwrt-kmod-bbr2.patch | patch -p1
+wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/693-Add_BBRv2_congestion_control_for_Linux_TCP.patch
 # CacULE
 wget -qO- https://github.com/QiuSimons/openwrt-NoTengoBattery/commit/7d44cab.patch | patch -p1
 wget -qO target/linux/generic/hack-5.4/694-cacule-5.4.patch https://github.com/hamadmarri/cacule-cpu-scheduler/raw/master/patches/CacULE/v5.4/cacule-5.4.patch
 # UKSM
-wget -qO target/linux/generic/hack-5.4/695-uksm-5.4.patch https://github.com/dolohow/uksm/raw/master/v5.x/uksm-5.4.patch
-# BBRv2
-wget -qO- https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/openwrt-kmod-bbr2.patch | patch -p1
-wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/BBRv2/693-Add_BBRv2_congestion_control_for_Linux_TCP.patch
+wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/R2S-R4S-X86-OpenWrt/raw/master/PATCH/UKSM/695-uksm-5.4.patch
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon

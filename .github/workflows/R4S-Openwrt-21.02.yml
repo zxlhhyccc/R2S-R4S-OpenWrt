@@ -145,7 +145,7 @@ jobs:
           name: ${{ steps.assemble_artifact.outputs.release_tag }}-ROM
           allowUpdates: true
           tag: ${{ steps.assemble_artifact.outputs.release_tag }}
-          commit: master
+          commit: 21.02
           replacesArtifacts: true
           draft: false
           prerelease: false

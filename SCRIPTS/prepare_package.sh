@@ -49,8 +49,6 @@ svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-
 # 翻译及部分功能优化
 svn co https://github.com/QiuSimons/OpenWrt-Add/trunk/addition-trans-zh package/emortal/addition-trans-zh
 cp -f ../SCRIPTS/zzz-default-settings package/emortal/addition-trans-zh/files/zzz-default-settings
-rm -rf package/emortal/addition-trans-zh/status
-sed -i '/status/d' package/emortal/addition-trans-zh/Makefile
 
 #Vermagic
 latest_version="$(curl -s https://github.com/openwrt/openwrt/releases |grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" |sed -n '/21/p' |sed -n 1p |sed 's/v//g' |sed 's/.tar.gz//g')"

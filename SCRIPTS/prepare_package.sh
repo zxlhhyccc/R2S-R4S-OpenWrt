@@ -46,6 +46,9 @@ svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash feeds/luc
 # SSR Plus: add DNSProxy support
 rm -rf ./feeds/luci/applications/luci-app-ssr-plus
 svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
+# 网易云音乐
+rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
+git clone -b master --single-branch https://github.com/immortalwrt/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
 # 翻译及部分功能优化
 svn co https://github.com/QiuSimons/OpenWrt-Add/trunk/addition-trans-zh package/emortal/addition-trans-zh
 cp -f ../SCRIPTS/zzz-default-settings package/emortal/addition-trans-zh/files/zzz-default-settings

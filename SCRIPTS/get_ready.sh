@@ -6,7 +6,7 @@ mkdir openwrt_back
 shopt -s extglobW
 tar zxvf ${latest_release}  --strip-components 1 -C ./openwrt_back
 rm -f ${latest_release}
-git clone --single-branch -b openwrt-21.02 https://github.com/immortalwrt/immortalwrt openwrt
+git clone -b openwrt-21.02 --depth 1 https://github.com/immortalwrt/immortalwrt openwrt
 rm -f ./openwrt/include/version.mk
 rm -f ./openwrt/include/kernel-version.mk
 rm -f ./openwrt/package/base-files/image-config.in

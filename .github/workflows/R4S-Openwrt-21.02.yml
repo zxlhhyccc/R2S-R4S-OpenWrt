@@ -76,6 +76,7 @@ jobs:
         run: |
           cd openwrt
           mv ../SEED/config_r4s.seed .config
+          #echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config
           make defconfig
       - name: Smart chmod
         run: |
@@ -86,25 +87,23 @@ jobs:
           find ./ -type f | grep -v -f ${MY_Filter} | xargs -s1024 file | grep 'executable\|ELF' | cut -d ':' -f1 | xargs -s1024 chmod 755
           rm -f ${MY_Filter}
           unset MY_Filter
+      - name: Cache
+        uses: klever1988/cachewrtbuild@main
+        with:
+          ccache: 'true'
+          prefix: ${{ github.workspace }}/openwrt
       - name: Make Download
         run: |
           df -h
           cd openwrt
           make download -j50
-      - name: Make Toolchain
-        run: |
-          df -h
-          cd openwrt
-          let make_process=$(nproc)+2
-          make toolchain/install -j${make_process} V=s
       - name: Compile Openwrt
         id: compileopenwrt
         continue-on-error: true
         run: |
           df -h
           cd openwrt
-          let Make_Process=$(nproc)+2
-          make -j${Make_Process} || make -j${Make_Process} V=s
+          make -j$(($(nproc) + 1)) || make -j$(($(nproc) + 1)) V=s
           echo $?
       - name: If Error
         if: steps.compileopenwrt.outcome == 'failure'
@@ -123,14 +122,14 @@ jobs:
           cd ./artifact/
           gzip -d *.gz && exit 0
           gzip *.img
-          sha256sum *.gz | tee R4S-OPoA-21.02.0-rc4-$(date +%Y-%m-%d).sha256sum
-          mv *ext4* ./R4S-OPoA-21.02.0-rc4-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *squashfs* ./R4S-OPoA-21.02.0-rc4-$(date +%Y-%m-%d)-sfs.img.gz
+          sha256sum *.gz | tee R4S-OPoA-21.02.0-$(date +%Y-%m-%d).sha256sum
+          mv *ext4* ./R4S-OPoA-21.02.0-$(date +%Y-%m-%d)-ext4.img.gz
+          mv *squashfs* ./R4S-OPoA-21.02.0-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
           cp .config ../artifact/R4S-config-full.seed
           ./scripts/diffconfig.sh > ../artifact/R4S-config-diff.seed
-          artifact_tag="R4S-OPoA-21.02.0-rc4-$(date +%Y-%m-%d)"
-          release_tag="R2S-R4S-OPoA-21.02.0-rc4-$(date +%Y-%m-%d)"
+          artifact_tag="R4S-OPoA-21.02.0-$(date +%Y-%m-%d)"
+          release_tag="R2S-R4S-OPoA-21.02.0-$(date +%Y-%m-%d)"
           echo "##[set-output name=artifact_tag;]$artifact_tag"
           echo "##[set-output name=release_tag;]$release_tag"
       - name: Upload Artifact

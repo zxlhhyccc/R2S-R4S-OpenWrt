@@ -1,11 +1,7 @@
 #!/bin/bash
 
-latest_release="$(curl -s https://github.com/openwrt/openwrt/releases |grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" |sed -n '/21/p' |sed -n 1p)"
-curl -LO "https://github.com/openwrt/openwrt/archive/${latest_release}"
-mkdir openwrt_back
-shopt -s extglobW
-tar zxvf ${latest_release}  --strip-components 1 -C ./openwrt_back
-rm -f ${latest_release}
+latest_release="$(curl -s https://github.com/openwrt/openwrt/releases |grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" |sed -n '/21/p' |sed -n 1p |sed 's/.tar.gz//g')"
+git clone --single-branch -b ${latest_release} https://github.com/openwrt/openwrt openwrt_back
 git clone -b openwrt-21.02 --depth 1 https://github.com/immortalwrt/immortalwrt openwrt
 rm -f ./openwrt/include/version.mk
 rm -f ./openwrt/include/kernel-version.mk

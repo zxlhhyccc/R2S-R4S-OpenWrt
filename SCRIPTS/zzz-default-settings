@@ -25,7 +25,6 @@ EOF
 uci commit system
 
 #Feeds 更换镜像源
-sed -i 'immortalwrt_core,s,downloads.openwrt.org,mirrors.tencent.com/lede,g' /etc/opkg/distfeeds.conf
 sed -i 's,downloads.openwrt.org,downloads.immortalwrt.cnsztl.eu.org,g' /etc/opkg/distfeeds.conf
 #Add PubKey
 mv /etc/key-build.pub /etc/opkg/keys/8ead5420c4005b0d

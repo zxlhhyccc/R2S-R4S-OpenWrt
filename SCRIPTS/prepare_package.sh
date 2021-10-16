@@ -66,6 +66,7 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 # Lets Fuck
 mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
+chmod +x ./package/base-files/files/usr/bin/fuck
 # Prepare PubKey
 wget -qNP package/base-files/files/etc https://downloads.immortalwrt.cnsztl.eu.org/snapshots/key-build.pub
 # 定制化配置

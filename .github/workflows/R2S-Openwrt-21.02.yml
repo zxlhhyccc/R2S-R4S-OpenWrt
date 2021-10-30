@@ -88,6 +88,8 @@ jobs:
         run: |
           TARGET_DEVICE_ARCH="$(grep "^CONFIG_TARGET_.*_.*=y$" ".config" | head -n 1 | sed 's/^CONFIG_TARGET_//g' | awk -F '_' '{print $1}')"
           echo "TARGET_DEVICE_ARCH=${TARGET_DEVICE_ARCH}-" >>$GITHUB_ENV
+          latest_release="$(curl -s https://github.com/openwrt/openwrt/tags | grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" | sed -n '/[2-9][0-9]/p' | sed -n 1p | sed 's/.tar.gz//g' | sed 's/v//g')"
+          echo "latest_release=${latest_release}" >>$GITHUB_ENV
       - name: Cache
         uses: klever1988/cachewrtbuild@test
         with:
@@ -124,14 +126,14 @@ jobs:
           cd ./artifact/
           gzip -d *.gz && exit 0
           gzip *.img
-          sha256sum *.gz | tee R2S-OPoA-21.02.0-$(date +%Y-%m-%d).sha256sum
-          mv *ext4* ./R2S-OPoA-21.02.0-$(date +%Y-%m-%d)-ext4.img.gz
-          mv *squashfs* ./R2S-OPoA-21.02.0-$(date +%Y-%m-%d)-sfs.img.gz
+          sha256sum *.gz | tee R2S-OPoA-${{ env.latest_release }}-$(date +%Y-%m-%d).sha256sum
+          mv *ext4* ./R2S-OPoA-${{ env.latest_release }}-$(date +%Y-%m-%d)-ext4.img.gz
+          mv *squashfs* ./R2S-OPoA-${{ env.latest_release }}-$(date +%Y-%m-%d)-sfs.img.gz
           cd ../openwrt
           cp .config ../artifact/R2S-config-full.seed
           ./scripts/diffconfig.sh > ../artifact/R2S-config-diff.seed
-          artifact_tag="R2S-OPoA-21.02.0-$(date +%Y-%m-%d)"
-          release_tag="R2S-R4S-OPoA-21.02.0-$(date +%Y-%m-%d)"
+          artifact_tag="R2S-OPoA-${{ env.latest_release }}-$(date +%Y-%m-%d)"
+          release_tag="R2S-R4S-OPoA-${{ env.latest_release }}-$(date +%Y-%m-%d)"
           echo "##[set-output name=artifact_tag;]$artifact_tag"
           echo "##[set-output name=release_tag;]$release_tag"
       - name: Upload Artifact

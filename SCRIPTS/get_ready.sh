@@ -22,6 +22,5 @@ cp -f ./openwrt_release/package/base-files/image-config.in ./openwrt/package/bas
 cp -f ./openwrt_release/version ./openwrt/version
 cp -f ./openwrt_release/version.date ./openwrt/version.date
 cp -rf ./openwrt_release/target/linux/* ./openwrt/target/linux/
-rm -rf ./openwrt_release
 
 exit 0

@@ -10,19 +10,4 @@ sed -i '/set_interface_core 8/a\ethtool -K eth0 rx off tx off && logger -t disab
 # 交换 lan/wan 口
 sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 
-# CacULE
-sed -i '/CONFIG_NR_CPUS/d' ./target/linux/rockchip/armv8/config-5.4
-echo '
-CONFIG_NR_CPUS=4
-CONFIG_CACULE_SCHED=y
-CONFIG_CACULE_RDB=y
-CONFIG_RDB_INTERVAL=19
-' >> ./target/linux/rockchip/armv8/config-5.4
-
-# UKSM
-echo '
-CONFIG_KSM=y
-CONFIG_UKSM=y
-' >> ./target/linux/rockchip/armv8/config-5.4
-
 chmod -R 755 ./

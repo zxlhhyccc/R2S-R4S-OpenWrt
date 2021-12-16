@@ -9,6 +9,12 @@ sed -i 's/Os/O3 -funsafe-math-optimizations -funroll-loops -ffunction-sections -
 ./scripts/feeds install -a
 
 ### 必要的 Patches ###
+# offload bug fix
+wget -qO - https://github.com/openwrt/openwrt/pull/4849.patch | patch -p1
+# TCP performance optimizations backport from linux/net-next
+wget -P target/linux/generic/backport-5.4 https://github.com/QiuSimons/YAOF/raw/master/PATCH/backport/695-tcp-optimizations.patch
+# introduce "le9" Linux kernel patches
+wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/YAOF/raw/master/PATCH/backport/695-le9i.patch
 # Patch arm64 型号名称
 wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch
 # Patch Kernel 以解决 FullCone 冲突
@@ -22,11 +28,12 @@ patch -p1 < ../PATCHES/001-fix-firewall-flock.patch
 # BBRv2
 wget -qO- https://github.com/QiuSimons/YAOF/raw/master/PATCH/BBRv2/openwrt-kmod-bbr2.patch | patch -p1
 wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/YAOF/raw/master/PATCH/BBRv2/693-Add_BBRv2_congestion_control_for_Linux_TCP.patch
-# CacULE
-wget -qO- https://github.com/QiuSimons/openwrt-NoTengoBattery/commit/7d44cab.patch | patch -p1
-wget -qO target/linux/generic/hack-5.4/694-cacule-5.4.patch https://github.com/hamadmarri/cacule-cpu-scheduler/raw/master/patches/CacULE/v5.4/cacule-5.4.patch
-# UKSM
-wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/YAOF/raw/master/PATCH/UKSM/695-uksm-5.4.patch
+# LRNG
+svn co https://github.com/QiuSimons/YAOF/trunk/PATCH/LRNG target/linux/generic/hack-5.4/
+echo '
+CONFIG_LRNG=y
+CONFIG_LRNG_JENT=y
+' >>./target/linux/generic/config-5.4
 
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
@@ -40,6 +47,9 @@ popd
 # DNSPod
 svn co https://github.com/msylgj/OpenWrt_luci-app/trunk/luci-app-tencentddns feeds/luci/applications/luci-app-tencentddns
 ln -sf ../../../feeds/luci/applications/luci-app-tencentddns ./package/feeds/luci/luci-app-tencentddns
+# Mosdns
+svn co https://github.com/QiuSimons/openwrt-mos/trunk/mosdns package/emortal/mosdns
+svn co https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns package/emortal/luci-app-mosdns
 # OpenClash
 rm -rf feeds/luci/applications/luci-app-openclash
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash feeds/luci/applications/luci-app-openclash
@@ -68,7 +78,7 @@ mkdir package/base-files/files/usr/bin
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
 chmod +x ./package/base-files/files/usr/bin/fuck
 # Prepare PubKey
-wget -qNP package/base-files/files/etc https://downloads.immortalwrt.cnsztl.eu.org/snapshots/key-build.pub
+wget -qNP package/base-files/files/etc https://mirrors.vsean.net/openwrt/snapshots/key-build.pub
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release

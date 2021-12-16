@@ -17,7 +17,7 @@ CONFIG_GCC_USE_VERSION_8=y
 
 ### BASIC ###
 CONFIG_PACKAGE_addition-trans-zh=y
-# CONFIG_PACKAGE_default-settings is not set
+# CONFIG_PACKAGE_default-settings-chn is not set
 CONFIG_PACKAGE_ipv6helper=y
 CONFIG_PACKAGE_cgi-io=y
 CONFIG_PACKAGE_coremark=y

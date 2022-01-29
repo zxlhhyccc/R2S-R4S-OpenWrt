@@ -52,7 +52,7 @@ svn co https://github.com/QiuSimons/openwrt-mos/trunk/mosdns package/emortal/mos
 svn co https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns package/emortal/luci-app-mosdns
 # OpenClash
 rm -rf feeds/luci/applications/luci-app-openclash
-svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash feeds/luci/applications/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash feeds/luci/applications/luci-app-openclash
 # SSR Plus: add DNSProxy support
 rm -rf ./feeds/luci/applications/luci-app-ssr-plus
 svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus

@@ -74,7 +74,9 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 
 ### 最后的收尾工作 ###
 # Lets Fuck
-mkdir package/base-files/files/usr/bin
+if [ ! -d "package/base-files/files/usr/bin" ]; then
+    mkdir package/base-files/files/usr/bin
+fi
 cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
 chmod +x ./package/base-files/files/usr/bin/fuck
 # 定制化配置

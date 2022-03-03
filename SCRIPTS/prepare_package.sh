@@ -19,6 +19,9 @@ wget -P target/linux/generic/hack-5.4 https://github.com/QiuSimons/YAOF/raw/mast
 wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/312-arm64-cpuinfo-Add-model-name-in-proc-cpuinfo-for-64bit-ta.patch
 # Patch Kernel 以解决 FullCone 冲突
 wget -P target/linux/generic/hack-5.4 https://github.com/immortalwrt/immortalwrt/raw/openwrt-21.02/target/linux/generic/hack-5.4/952-net-conntrack-events-support-multiple-registrant.patch
+# fullconenat
+rm -rf package/kernel/fullconenat
+svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/openwrt-fullconenat ./package/kernel/fullconenat
 pushd package/kernel/fullconenat
 wget -qO- https://github.com/QiuSimons/YAOF/raw/master/PATCH/firewall/fullcone6.patch | patch -p2
 popd

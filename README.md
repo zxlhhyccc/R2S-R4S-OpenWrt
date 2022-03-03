@@ -38,7 +38,7 @@
 - app:ssrplus
 - app:ramfree
 - app:serverchan
-- subconverter
+- app:subconverter
 - app:tencentddns
 - app:turboacc
 - app:unblockneteasemusic

@@ -101,7 +101,5 @@ sed -i 's/2016/2208/g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-def
 #sed -i 's/1512/1608/g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 # 生成默认配置及缓存
 rm -rf .config
-find ./ -name *.orig | xargs rm -f
-find ./ -name *.rej | xargs rm -f
 
 exit 0

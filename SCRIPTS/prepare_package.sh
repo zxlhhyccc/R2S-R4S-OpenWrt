@@ -44,7 +44,7 @@ CONFIG_LRNG_JENT=y
 ### 获取额外的 LuCI 应用、主题和依赖 ###
 # MOD Argon
 pushd feeds/luci/themes/luci-theme-argon
-wget -qO- https://github.com/msylgj/luci-theme-argon/commit/7c191be.patch | patch -p1
+wget -qO- https://github.com/msylgj/luci-theme-argon/commit/9fe84a8.patch | patch -p1
 popd
 # MOD TurboACC To Add BBRv2
 pushd feeds/luci/applications/luci-app-turboacc

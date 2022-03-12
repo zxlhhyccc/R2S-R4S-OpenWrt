@@ -69,7 +69,7 @@ git clone -b master --depth 1 https://github.com/tty228/luci-app-serverchan.git 
 rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
 git clone -b master --depth 1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
 # 翻译及部分功能优化
-svn co https://github.com/QiuSimons/OpenWrt-Add/trunk/addition-trans-zh package/emortal/addition-trans-zh
+svn co https://github.com/msylgj/OpenWrt-Add/trunk/addition-trans-zh package/emortal/addition-trans-zh
 cp -f ../SCRIPTS/zzz-default-settings package/emortal/addition-trans-zh/files/zzz-default-settings
 
 #Vermagic
@@ -80,10 +80,7 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 
 ### 最后的收尾工作 ###
 # Lets Fuck
-if [ ! -d "package/base-files/files/usr/bin" ]; then
-    mkdir package/base-files/files/usr/bin
-fi
-cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
+wget -P package/base-files/files/usr/bin https://github.com/msylgj/OpenWrt-Add/raw/mod/fuck
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release

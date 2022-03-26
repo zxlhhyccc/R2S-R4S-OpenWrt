@@ -64,10 +64,7 @@ rm -rf ./feeds/luci/applications/luci-app-ssr-plus
 svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
 # ServerChan
 rm -rf feeds/luci/applications/luci-app-serverchan
-git clone -b master --depth 1 https://github.com/tty228/luci-app-serverchan.git feeds/luci/applications/luci-app-serverchan
-# 网易云音乐
-rm -rf feeds/luci/applications/luci-app-unblockneteasemusic
-git clone -b master --depth 1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git feeds/luci/applications/luci-app-unblockneteasemusic
+git clone -b fix-ip-black --depth 1 https://github.com/msylgj/luci-app-serverchan.git feeds/luci/applications/luci-app-serverchan
 
 #Vermagic
 latest_version="$(curl -s https://github.com/openwrt/openwrt/tags | grep -Eo "v[0-9\.]+\-*r*c*[0-9]*.tar.gz" | sed -n '/[2-9][0-9]/p' | sed -n 1p | sed 's/v//g' | sed 's/.tar.gz//g')"

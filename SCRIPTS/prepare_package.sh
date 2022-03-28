@@ -74,7 +74,10 @@ sed -i -e 's/^\(.\).*vermagic$/\1cp $(TOPDIR)\/.vermagic $(LINUX_DIR)\/.vermagic
 
 ### 最后的收尾工作 ###
 # Lets Fuck
-wget -P package/base-files/files/usr/bin https://github.com/msylgj/OpenWrt-Add/raw/mod/fuck
+if [ ! -d "package/base-files/files/usr/bin" ]; then
+    mkdir package/base-files/files/usr/bin
+fi
+cp -f ../SCRIPTS/fuck package/base-files/files/usr/bin/fuck
 # 定制化配置
 sed -i "s/'%D %V %C'/'Built by OPoA($(date +%Y.%m.%d))@%D %V'/g" package/base-files/files/etc/openwrt_release
 sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release

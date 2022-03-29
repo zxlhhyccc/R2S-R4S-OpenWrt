@@ -59,9 +59,6 @@ svn co https://github.com/QiuSimons/openwrt-mos/trunk/luci-app-mosdns package/em
 # OpenClash
 rm -rf feeds/luci/applications/luci-app-openclash
 svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash feeds/luci/applications/luci-app-openclash
-# SSR Plus: add DNSProxy support
-rm -rf ./feeds/luci/applications/luci-app-ssr-plus
-svn co https://github.com/msylgj/helloworld/branches/dnsproxy-edns/luci-app-ssr-plus feeds/luci/applications/luci-app-ssr-plus
 # ServerChan
 rm -rf feeds/luci/applications/luci-app-serverchan
 git clone -b fix-ip-black --depth 1 https://github.com/msylgj/luci-app-serverchan.git feeds/luci/applications/luci-app-serverchan
@@ -84,12 +81,6 @@ sed -i "/DISTRIB_REVISION/d" package/base-files/files/etc/openwrt_release
 sed -i "/%D/a\ Built by OPoA($(date +%Y.%m.%d))" package/base-files/files/etc/banner
 sed -i "/openwrt_banner/d" package/emortal/default-settings/files/99-default-settings
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-pushd feeds/luci/applications/luci-app-ssr-plus
-sed -i 's,ispip.clang.cn/all_cn,gh.404delivr.workers.dev/https://github.com/QiuSimons/Chnroute/raw/master/dist/chnroute/chnroute,' root/etc/init.d/shadowsocksr
-sed -i 's,YW5vbnltb3Vz/domain-list-community/release/gfwlist.txt,Loyalsoldier/v2ray-rules-dat/release/gfw.txt,' root/etc/init.d/shadowsocksr
-sed -i '/Clang.CN.CIDR/a\o:value("gh.404delivr.workers.dev/https://github.com/QiuSimons/Chnroute/raw/master/dist/chnroute/chnroute.txt", translate("QiuSimons/Chnroute"))' luasrc/model/cbi/shadowsocksr/advanced.lua
-wget -qO- https://github.com/1715173329/ssrplus-routing-rules/raw/master/direct/microsoft.txt | cat > root/etc/ssrplus/white.list
-popd
 sed -i 's/1608/1800/g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 sed -i 's/2016/2208/g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
 #sed -i 's/1512/1608/g' feeds/luci/applications/luci-app-cpufreq/root/etc/uci-defaults/cpufreq
